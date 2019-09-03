@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxzy.mapper.GoodsPicMapper">
+
+
+    <insert id="insert" parameterType="com.hxzy.entity.GoodsPic">
+       insert into shop_goods_piclist (id, picurl, goodid  )
+      values (#{id,jdbcType=INTEGER}, #{picurl,jdbcType=VARCHAR}, #{goodid,jdbcType=INTEGER})
+  </insert>
+
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from shop_goods_piclist
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+
+    <select id="serach" parameterType="int" resultType="com.hxzy.entity.GoodsPic">
+        select *  from shop_goods_piclist
+        where goodid=#{id}
+    </select>
+
+
+    <!-- 批量新增-->
+    <insert id="insertBatch"  >
+       insert into shop_goods_piclist ( picurl, goodid  )  values
+       <foreach collection="list" item="p" separator=",">
+         ( #{p.picurl}, #{p.goodid})
+       </foreach>
+  </insert>
+
+
+
+</mapper>
